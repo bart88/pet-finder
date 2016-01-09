@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <title>Maps Demo</title>
     <link rel="stylesheet" media="all" href="css/styles.css" />
+
+
+    <!-- Replace everything with require-js -->
+    <script src="scripts/libs/requirejs/require.js" data-main="scripts/"></script>
+
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="mapfunctions.js"></script>
     <script src="utility.js"></script>
     <script>
         var dataFeed;
+        //@todo - remove this !
         var token = '1668433980109240|dNtaRlW_hfoSKocTWtS3UELlJa8';
         //var regex = /(?:lost\s+|found|sighting\s+)(?:dog|cat|bird+?(?:s\b|\b))(.*)(?:\#.+)/ig;
         var regex = /(\w+\b)(?:\s)(bird|cat|dog(?=s\b|\b))(?:\s|s+)(.*)(?:\#\w+\b\s)([0-9\/]+\b)/ig;
@@ -106,11 +112,6 @@
 
         // Global Variables
         var geocoder;
-        // @todo
-        // add a custom marker to the map
-        function addMarker() {
-
-        }
 
         // use addresses for the marker
         // @todo stage 2 - parse data from facebook

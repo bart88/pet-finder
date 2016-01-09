@@ -1,4 +1,15 @@
 // @todo - don't globally expose all these methods
+define(function(require){
+  var $ = require('jquery');
+
+  return {
+    'geocode' : function() {
+
+    }
+  };
+
+
+});
 /**
  *
  * @param geocoder
@@ -75,3 +86,5 @@ function createMessage(item, text, image) {
   return '<h3>'+ item.action + ' ' + item.type +'</h3><p>'+ item.date +'</p><p><img src="'+image+'"></p><p>' + text +'</p>';
 
 }
+
+});
