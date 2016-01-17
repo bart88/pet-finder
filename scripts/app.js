@@ -27,15 +27,14 @@ require.config({
 
 
 // parser done
-require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed'], function(google, fb, $, base_parser, geocoder) {
-  
+require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed'],
+  function(google, fb, $, base_parser, geocoder) {
 
   var regex = /(\w+\b)(?:\s)(bird|cat|dog(?=s\b|\b))(?:\s|s+)(.*)(?:\#\w+\b\s)([0-9\/]+\b)/gi;
   var groups = ['action', 'type', 'location', 'date'];
   var parser = new base_parser(regex, groups);
-
+  var gmapsGeocoder = new geocoder();
   // add in the geocoder.
-  console.log(google);
 
   // get a data feed.
 
