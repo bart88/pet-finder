@@ -8,9 +8,9 @@ define(function(){
    * @constructor
    */
   function Geocoder(maps_api) {
-    this.geocoder = maps_api.Geocoder();
-    this.status_ok = maps_api.maps.GeocoderStatus.OK;
-    this.zero_results = maps_api.maps.GeocoderStatus.ZERO_RESULTS;
+    this.geocoder = new maps_api.Geocoder();
+    this.status_ok = maps_api.GeocoderStatus.OK;
+    this.zero_results = maps_api.GeocoderStatus.ZERO_RESULTS;
   }
 
   /**
@@ -34,23 +34,19 @@ define(function(){
       if (status == ok) {
         if (status != zero_results) {
 
-          var object = {
-            'address' : address,
-            'position': results[0].geometry.location
-          };
-
+          var position = results[0].geometry.location;
+          console.log(position);
           // If there is a callback trigger.
           if(callback && typeof callback === 'function') {
-            return callback(object);
+            return callback(position);
           }
 
-          return object;
+          return position;
         } else {
           console.error('No results found for parsed address :' + address);
           console.error(status);
         }
       } else {
-
         console.error('Geocode address was not successful for the following reasion : ' + status);
       }
     });
