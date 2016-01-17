@@ -17,28 +17,24 @@ require.config({
     noext: "libs/requirejs-plugins/noext",
     property:  "libs/requirejs-plugins/propertyParser",
     text: "libs/requirejs-plugins/text",
-    jquery : "libs/jquery/jquery.js",
+    jquery : "libs/jquery/jquery",
     facebook : "//connect.facebook.net/en_US/all",
+    googlemaps: "libs/googlemaps"
   }
 });
 
-define('gmaps',['async!http://maps.google.com/maps/api/js?sensor=false'], function() {
-  console.log(google);
-});
+
 
 
 // parser done
-require(['libs/fb', 'base_parser', 'geocoder', 'feed'], function(fb,base_parser, geocoder) {
-
-
-  // hopefull google comes down along with facebook.
+require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed'], function(google, fb, $, base_parser, geocoder) {
+  
 
   var regex = /(\w+\b)(?:\s)(bird|cat|dog(?=s\b|\b))(?:\s|s+)(.*)(?:\#\w+\b\s)([0-9\/]+\b)/gi;
   var groups = ['action', 'type', 'location', 'date'];
   var parser = new base_parser(regex, groups);
 
   // add in the geocoder.
-  console.log(fb);
   console.log(google);
 
   // get a data feed.
