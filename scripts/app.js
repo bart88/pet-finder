@@ -7,6 +7,16 @@ require.config({
   },
   paths: {
     async : "libs/requirejs-plugins/async",
+    depend: "libs/requirejs-plugins/depend",
+    font: "libs/requirejs-plugins/font",
+    goog: "libs/requirejs-plugins/goog",
+    image: "libs/requirejs-plugins/image",
+    json: "libs/requirejs-plugins/json",
+    markdown_converter: "libs/requirejs-plugins/markdown.converter",
+    mdown: "libs/requirejs-plugins/mdown",
+    noext: "libs/requirejs-plugins/noext",
+    property:  "libs/requirejs-plugins/propertyParser",
+    text: "libs/requirejs-plugins/text",
     jquery : "libs/jquery/jquery.js",
     facebook : "//connect.facebook.net/en_US/all",
   }
