@@ -5,3 +5,5 @@ node_modules/*
 bower_components
 bower_components/*
 scripts/libs/**
+bk
+bk/*
