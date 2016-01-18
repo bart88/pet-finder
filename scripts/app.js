@@ -39,7 +39,10 @@ require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed', 
   var groups = ['action', 'type', 'location', 'date'];
   var parser = new base_parser(regex, groups);
   var gmapsGeocoder = new geocoder(google);
+  // Basic element creation and templating. @todo - Use something better
   var imageTemplate = new template('img');
+  var headingTemplate = new template('h3');
+  var messageTemplate = new template('p');
   // create a map
   var map = new gmap(google, document.getElementById('map'));
   map.setMap();
@@ -65,11 +68,6 @@ require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed', 
           'value' : object.picture
         }) : '';
 
-        // get a geocoded position from a text address.
-        var geoLocation = gmapsGeocoder.address(msg.location.trim(' '), function(pos) {
-          return_object.geolocation = pos;
-        });
-
         return_object = {
             'message'     : object.message,
             'action'      : msg.action,
@@ -81,10 +79,37 @@ require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed', 
         return return_object;
       }
 
-    });
+    }).filter(function(o){if(o){return o;}});
 
     // with parsed objects lets place them on a map
     parsed_objects.map(function(obj){
+      var picture = "";
+      if(typeof obj.picture === 'object') {
+        picture = obj.picture[0].outerHTML;
+      }
+
+      var title = headingTemplate.attach({
+        'name' : 'innerHTML',
+        'value' : obj.action+' '+obj.type
+      })[0].outerHTML;
+
+      var message = messageTemplate.attach({
+        'name': 'innerHTML',
+        'value': picture+obj.message
+      })[0].outerHTML;
+
+      var text = message[0].outerHTML;
+
+      console.log(title);
+      console.log(message);
+
+
+      var geoLocation = gmapsGeocoder.address(obj.location, function(pos) {
+        map.marker(pos, {
+          'title': title,
+          'message': message
+        });
+      });
 
     });
 
