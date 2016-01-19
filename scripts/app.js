@@ -63,10 +63,10 @@ require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed', 
 
         var return_object = {};
         // create a picture
-        var picutre = (object.picture) ? imageTemplate.attach({
+        var picture = (object.picture) ? imageTemplate.attach({
           'name'  : 'src',
           'value' : object.picture
-        }) : '';
+        })[0].outerHTML : '';
 
         return_object = {
             'message'     : object.message,
@@ -74,7 +74,7 @@ require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed', 
             'type'        : msg.type,
             'location'    : msg.location.trim(' '), // trim off excess whitespace
             'date'        : msg.date,
-            'picture'     : picutre
+            'picture'     : picture
         };
         return return_object;
       }
@@ -83,10 +83,6 @@ require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed', 
 
     // with parsed objects lets place them on a map
     parsed_objects.map(function(obj){
-      var picture = "";
-      if(typeof obj.picture === 'object') {
-        picture = obj.picture[0].outerHTML;
-      }
 
       var title = headingTemplate.attach({
         'name' : 'innerHTML',
@@ -95,14 +91,10 @@ require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed', 
 
       var message = messageTemplate.attach({
         'name': 'innerHTML',
-        'value': picture+obj.message
+        'value': '<div class="picture__pet">'+obj.picture+'</p>'+obj.message
       })[0].outerHTML;
 
       var text = message[0].outerHTML;
-
-      console.log(title);
-      console.log(message);
-
 
       var geoLocation = gmapsGeocoder.address(obj.location, function(pos) {
         map.marker(pos, {
