@@ -5,6 +5,8 @@ node_modules/*
 bower_components
 bower_components/*
 scripts/libs/**/*
+!scripts/libs/fb.js
+!scripts/libs/googlemaps.js
 bk
 bk/*
 rename.sh
