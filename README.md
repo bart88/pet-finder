@@ -19,6 +19,13 @@ For **Linux/OS X** users you can simply run the ```./install.sh```. It will run 
 
 If you are a **Windows** user you will need to use something like cgywin to run the shell script.
 
+### How to run the http-server
+
+The ```npm``` install comes with a simple http server node module.
+To use it simply run :
+
+```node node_modules/http-server/bin/http-server```s
+
 
 ## How it works
 
@@ -27,7 +34,7 @@ and all apis used are javascript based.
 
 The application makes use of require js to load all these aysnc libraries. First a request is made to get all the stories from Facebook's graph api. From there the list is parsed and sorted for valid tokens like "LOST","FOUND", "CAT", "DOG", "BIRD" etc. Also during the parse a location token is found.
 
-This string is then used with google maps api geocoder which returns the lat,lng to place the marker. With marker the additonal facebook data is added to information window on the marker and displays when clicked.
+This string is then used with google maps api geocoder which returns the lat,lng to place the marker. With marker the additional facebook data is added to information window on the marker and displays when clicked.
 
 
 ## Things to Do
@@ -36,6 +43,5 @@ This string is then used with google maps api geocoder which returns the lat,lng
 - Add configuration to extend and add multiple data points for getting stories from ( facebook public pages ).
 - Look into using localStorage as a means to improve performance.
 - Doing it all in the front end is going to suck for performance, we will need to use the facebook api server side
-and cache all the stories. From there we should also store gecoded addresses from previous addresses as we are
-severly limited in capacity for geocode lookups.
-
+and cache all the stories. From there we should also store geocoded addresses from previous addresses as we are
+severely limited in capacity for geocode lookups.
