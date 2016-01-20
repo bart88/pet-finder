@@ -35,14 +35,17 @@ require.config({
 require(['googlemaps!', 'libs/fb', 'jquery', 'base_parser', 'geocoder', 'feed', 'template', 'maps'],
   function(google, fb, $, base_parser, geocoder, feed, template, gmap) {
 
-  var regex = /(\w+\b)(?:\s)(bird|cat|dog(?=s\b|\b))(?:\s|s+)(.*)(?:\#\w+\b\s)([0-9\/]+\b)/gi;
-  var groups = ['action', 'type', 'location', 'date'];
+  var regex = /(\w+\b)(?:\s)(bird|cat|dog(?=s\b|\b))(?:\s|s+)(.*)(?:\#\w+\b\s)([0-9\/]+\b)(\b.*)(https?:\/\/[^\s]+)/gi;
+  var groups = ['action', 'type', 'location', 'date', 'text', 'facebook_link'];
   var parser = new base_parser(regex, groups);
   var gmapsGeocoder = new geocoder(google);
+
   // Basic element creation and templating. @todo - Use something better
   var imageTemplate = new template('img');
   var headingTemplate = new template('h3');
   var messageTemplate = new template('p');
+  var anchorTemplate = new template('a');
+
   // create a map
   var map = new gmap(google, document.getElementById('map'));
   map.setMap();
