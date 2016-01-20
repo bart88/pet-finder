@@ -8,6 +8,9 @@ google maps to provide a visual map of lost pets in your geographic location.
 
 ## How to install
 
+``` git clone <<address goes here>> ```
+``` ./install.sh ```
+
 All that is needed to get up and running with this project :
 - ```git```
 - ```node```
