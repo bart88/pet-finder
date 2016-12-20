@@ -9,11 +9,12 @@ services:
     depends_on:
       - node
   node:
-    image: node:6-onbuild
+    build: .
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
+      - .:/home/nodejs/app
+      - /home/nodejs/app/node_modules
     depends_on:
       - database
     networks:

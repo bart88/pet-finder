@@ -10,6 +10,8 @@ const PORT = config.port;
 // App
 const app = express();
 
+
+// @todo -
 function runFeed() {
   var path = '/adelaidedogs/';
   var fields = ['message', 'created_time', 'id', 'picture', 'full_picture'];
@@ -28,7 +30,6 @@ function runFeed() {
 
     processData(messages);
   });
-
 }
 
 function processData(feed) {
@@ -47,7 +48,7 @@ function processData(feed) {
       };
     }
   });
-
+  console.log(parsed_objects);
   // write this to disk for now or into the database.
 }
 
