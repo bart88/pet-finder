@@ -1,0 +1,26 @@
+
+version: '2'
+
+services:
+  nginx:
+    build: ./dockerfiles/nginx
+    ports:
+      - "8888:80"
+    depends_on:
+      - node
+  node:
+    image: node:6-onbuild
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - database
+    networks:
+      default:
+  database:
+    image: mongo
+    volumes:
+      - ./mongo-data:/data/db
+    networks:
+      default:
