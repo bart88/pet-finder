@@ -10,3 +10,5 @@ scripts/libs/**/*
 bk
 bk/*
 rename.sh
+mongo-data
+mongo-data/*
