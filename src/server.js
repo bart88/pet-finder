@@ -16,7 +16,7 @@ const ACCESS_TOKEN = config.accessToken;
 const app = express();
 
 // Start up the service 
-taskService.start('getData', '*/3 * * * * *', getFeedData);
+taskService.start('getData', '*/1 * * * * *', getFeedData);
 
 // Routes
 app.get('/', function (req, res) {

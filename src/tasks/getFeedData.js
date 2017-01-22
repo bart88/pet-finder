@@ -4,7 +4,6 @@ var FB = require('fb');
 var fb = new FB.Facebook(config.facebook);
 var ACCESS_TOKEN = config.accessToken;
 
-
 var feed = function runFeed(fbPath, fields) {
   var path = '/adelaidedogs/';
   var fields = ['message', 'created_time', 'id', 'picture', 'full_picture'];
@@ -44,12 +43,12 @@ function processData(feed) {
 }
 
 /**
- * @todo - place this in a module
- * Function that writes the processed data into a database.
+ * Function that writes the processed data.
+ * @todo - look into writing this into a database.
  */
 function writeData(data) {
   var date = new Date().toISOString();
   fs.writeFile('./src/data/feed_'+ date + '.json', JSON.stringify(data), 'utf8');
 }
 
-module.exports = feed(path);
+module.exports = feed;
