@@ -2,55 +2,21 @@
 
 const express = require('express');
 const config = require('./config');
+var fs = require('fs');
 var FB = require('fb');
 var fb = new FB.Facebook(config.facebook);
+var taskService = require('./services/taskService');
+var getFeedData = require('./tasks/getFeedData');
 const parser = require('./parser/base_parser');
 const PORT = config.port;
+const ACCESS_TOKEN = config.accessToken;
+
 
 // App
 const app = express();
 
-
-// @todo -
-function runFeed() {
-  var path = '/adelaidedogs/';
-  var fields = ['message', 'created_time', 'id', 'picture', 'full_picture'];
-  var token = '1668433980109240|dNtaRlW_hfoSKocTWtS3UELlJa8';
-  var feed;
-  var request_string = path+'feed?access_token='+token+'&fields='+fields.join(',');
-
-  FB.api(request_string, function(res) {
-    if(!res || res.error) {
-      console.log(!res ? 'error occurred' : res.error);
-      return;
-    }
-    var messages = res.data.filter(function(object) {
-      if (object.message) return object;
-    });
-
-    processData(messages);
-  });
-}
-
-function processData(feed) {
-  var parsed_objects = feed.map(function (object) {
-    var msg = parser.parse(object.message);
-    if(msg.action && msg.location) {
-      return {
-        'message' : object.message,
-        'action': msg.action,
-        'type': msg.type,
-        'location': msg.location,
-        'date': msg.date,
-        'created_time': object.created_time,
-        'picture_url': object.picture,
-        'full_picture_url': object.full_picture
-      };
-    }
-  });
-  console.log(parsed_objects);
-  // write this to disk for now or into the database.
-}
+// Start up the service 
+taskService.start('getData', '*/3 * * * * *', getFeedData);
 
 // Routes
 app.get('/', function (req, res) {

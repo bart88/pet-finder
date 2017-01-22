@@ -7,5 +7,6 @@ config.facebook = {
   appSecret:      process.env.FACEBOOK_APPSECRET      || 'f8a33a0e8685e4e7165862864f394203'
 };
 
+config.accessToken = '1668433980109240|dNtaRlW_hfoSKocTWtS3UELlJa8';
 
 module.exports = config;

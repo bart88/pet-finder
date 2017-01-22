@@ -24,6 +24,9 @@ else
 fi
 
 start() {
+  # @todo - check to see if docker or docker-machine is running ?
+
+
   notice "Building images ..."
   docker-compose build
   notice "Starting ..."
